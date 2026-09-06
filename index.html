@@ -1,563 +1,862 @@
-html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Jayy Valley — Welcome to the Syndicate</title>
+<title>JAYY VALLEY — Welcome to the Syndicate</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap');
 
-    html {
-      scroll-behavior: smooth;
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    body {
-      background: #0b0b0b;
-      color: #f2f0e8;
-      font-family: Arial, Helvetica, sans-serif;
-      overflow-x: hidden;
-    }
+html {
+    scroll-behavior: smooth;
+}
 
-    /* =========================
-       BACKGROUND TEXTURE
-    ========================= */
+body {
+    background: #080808;
+    color: #f5f5f5;
+    font-family: "Space Mono", monospace;
+    overflow-x: hidden;
+}
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.08;
-      background-image:
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 3px,
-          #ffffff 4px
-        );
-      z-index: 10;
-    }
+/* ===== SCREEN EFFECT ===== */
 
-    /* =========================
-       NAVIGATION
-    ========================= */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 3px,
+        rgba(255,255,255,.035) 4px
+    );
+}
+
+/* ===== NAV ===== */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 68px;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 5vw;
+
+    background: rgba(8,8,8,.9);
+    border-bottom: 1px solid #292929;
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 20px;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: #d8ff00;
+}
+
+nav ul {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+nav a:hover {
+    color: #d8ff00;
+}
+
+/* ===== HERO ===== */
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+
+    padding: 140px 6vw 80px;
+
+    display: flex;
+    align-items: center;
+}
+
+.hero::after {
+    content: "951";
+
+    position: absolute;
+    right: 4vw;
+    top: 25%;
+
+    font-family: "Archivo Black", sans-serif;
+    font-size: 18vw;
+
+    color: transparent;
+    -webkit-text-stroke: 1px #242424;
+
+    transform: rotate(-12deg);
+}
+
+.speed-lines {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.speed-lines::before,
+.speed-lines::after {
+    content: "";
+    position: absolute;
+
+    width: 160%;
+    height: 1px;
+
+    background: #333;
+
+    transform: rotate(-18deg);
+}
+
+.speed-lines::before {
+    top: 30%;
+    left: -30%;
+    box-shadow:
+        0 45px #242424,
+        0 90px #242424,
+        0 135px #242424,
+        0 180px #242424;
+}
+
+.speed-lines::after {
+    top: 70%;
+    left: -20%;
+    box-shadow:
+        0 35px #222,
+        0 70px #222,
+        0 105px #222;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+
+.kicker {
+    color: #d8ff00;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-family: "Archivo Black", sans-serif;
+    font-size: clamp(75px, 16vw, 200px);
+    line-height: .76;
+    letter-spacing: -9px;
+    text-transform: uppercase;
+}
+
+.hero h1 .outline {
+    color: transparent;
+    -webkit-text-stroke: 2px #fff;
+}
+
+.hero-sub {
+    margin-top: 42px;
+    font-size: clamp(16px, 2.4vw, 25px);
+    line-height: 1.5;
+    max-width: 700px;
+}
+
+.hero-sub strong {
+    color: #d8ff00;
+}
+
+.enter {
+    display: inline-block;
+    margin-top: 35px;
+
+    padding: 15px 25px;
+
+    border: 1px solid #d8ff00;
+
+    color: #d8ff00;
+    text-decoration: none;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.enter:hover {
+    background: #d8ff00;
+    color: #080808;
+}
+
+/* ===== MANGA PANEL ===== */
+
+.panel-strip {
+    display: flex;
+    width: 100%;
+
+    border-top: 1px solid #292929;
+    border-bottom: 1px solid #292929;
+
+    overflow: hidden;
+}
+
+.panel {
+    flex: 1;
+    padding: 17px 25px;
+
+    border-right: 1px solid #292929;
+
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    white-space: nowrap;
+}
+
+.panel:nth-child(2) {
+    color: #d8ff00;
+}
+
+/* ===== GENERAL SECTIONS ===== */
+
+section {
+    padding: 120px 6vw;
+    border-bottom: 1px solid #242424;
+}
+
+.label {
+    color: #d8ff00;
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-family: "Archivo Black", sans-serif;
+    font-size: clamp(55px, 9vw, 115px);
+    line-height: .82;
+    letter-spacing: -5px;
+    text-transform: uppercase;
+    margin-bottom: 55px;
+}
+
+/* ===== SYNDICATE ===== */
+
+.syndicate {
+    position: relative;
+}
+
+.syndicate::before {
+    content: "THE WORLD";
+
+    position: absolute;
+    right: 5vw;
+    top: 110px;
+
+    font-family: "Archivo Black", sans-serif;
+    font-size: 8vw;
+
+    color: transparent;
+    -webkit-text-stroke: 1px #202020;
+
+    transform: rotate(8deg);
+}
+
+.syndicate-text {
+    position: relative;
+    z-index: 2;
+
+    max-width: 850px;
+
+    font-size: clamp(18px, 2.5vw, 29px);
+    line-height: 1.7;
+}
+
+.syndicate-text span {
+    color: #d8ff00;
+}
+
+/* ===== MUSIC ===== */
+
+.music-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.music-card {
+    min-height: 330px;
+
+    border: 1px solid #292929;
+
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.music-card:hover {
+    border-color: #d8ff00;
+}
+
+.music-card::after {
+    content: "♪";
+
+    position: absolute;
+    right: -10px;
+    bottom: -45px;
+
+    font-family: serif;
+    font-size: 180px;
+
+    color: transparent;
+    -webkit-text-stroke: 1px #222;
+}
+
+.number {
+    font-size: 10px;
+    color: #777;
+}
+
+.music-card h3 {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 42px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.music-card p {
+    color: #999;
+    font-size: 12px;
+    line-height: 1.7;
+    max-width: 500px;
+}
+
+/* ===== BOOKS ===== */
+
+.book {
+    position: relative;
+
+    border: 1px solid #292929;
+
+    padding: 50px;
+
+    overflow: hidden;
+}
+
+.book::after {
+    content: "MEMORY";
+
+    position: absolute;
+    right: -30px;
+    bottom: -30px;
+
+    font-family: "Archivo Black", sans-serif;
+    font-size: 100px;
+
+    color: transparent;
+    -webkit-text-stroke: 1px #222;
+
+    transform: rotate(-8deg);
+}
+
+.book-number {
+    color: #d8ff00;
+    font-family: "Archivo Black", sans-serif;
+    font-size: 70px;
+}
+
+.book h3 {
+    position: relative;
+    z-index: 2;
+
+    font-family: "Archivo Black", sans-serif;
+    font-size: clamp(35px, 6vw, 75px);
+
+    line-height: .9;
+    text-transform: uppercase;
+
+    margin: 25px 0;
+}
+
+.book p {
+    position: relative;
+    z-index: 2;
+
+    max-width: 700px;
+
+    color: #999;
+    line-height: 1.8;
+}
+
+/* ===== MEDIA ===== */
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.media-box {
+    aspect-ratio: 1 / 1;
+
+    border: 1px solid #292929;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-box::before {
+    content: "▶";
+
+    font-size: 45px;
+    color: #242424;
+}
+
+.media-box::after {
+    content: "";
+
+    position: absolute;
+    width: 140%;
+    height: 1px;
+
+    background: #333;
+
+    transform: rotate(-35deg);
+}
+
+.media-box span {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+
+    color: #777;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+/* ===== 5LEAF ===== */
+
+.leaf-section {
+    min-height: 90vh;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.leaf-section::before {
+    content: "5";
+
+    position: absolute;
+    right: -4vw;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-family: "Archivo Black", sans-serif;
+    font-size: 55vw;
+
+    line-height: .6;
+
+    color: transparent;
+    -webkit-text-stroke: 1px #222;
+}
+
+.leaf-content {
+    position: relative;
+    z-index: 2;
+}
+
+.leaf-title {
+    font-family: "Archivo Black", sans-serif;
+
+    font-size: clamp(80px, 17vw, 210px);
+
+    line-height: .7;
+    letter-spacing: -10px;
+
+    text-transform: uppercase;
+}
+
+.leaf-title span {
+    color: #d8ff00;
+}
+
+.leaf-description {
+    max-width: 600px;
+
+    margin-top: 45px;
+
+    color: #999;
+    line-height: 1.8;
+}
+
+/* ===== FOOTER ===== */
+
+footer {
+    padding: 70px 6vw;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.footer-logo {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 45px;
+    line-height: .75;
+}
+
+.footer-logo span {
+    color: #d8ff00;
+}
+
+footer p {
+    color: #666;
+    font-size: 9px;
+    line-height: 1.8;
+    text-align: right;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 700px) {
 
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 18px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(11, 11, 11, 0.9);
-      border-bottom: 1px solid #333;
-      z-index: 20;
+        padding: 0 18px;
     }
 
-    .nav-name {
-      font-size: 18px;
-      font-weight: 900;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+    nav ul {
+        gap: 9px;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 22px;
-      list-style: none;
+    nav a {
+        font-size: 7px;
     }
-
-    .nav-links a {
-      color: #f2f0e8;
-      text-decoration: none;
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .nav-links a:hover {
-      text-decoration: underline;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
 
     .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 120px 8vw 80px;
-      position: relative;
-      border-bottom: 1px solid #333;
-    }
-
-    .issue {
-      font-family: monospace;
-      font-size: 11px;
-      letter-spacing: 3px;
-      margin-bottom: 25px;
-      opacity: 0.65;
+        padding: 120px 20px 70px;
     }
 
     .hero h1 {
-      font-size: clamp(70px, 15vw, 190px);
-      line-height: 0.78;
-      letter-spacing: -7px;
-      text-transform: uppercase;
-      font-weight: 1000;
-      max-width: 1000px;
+        font-size: 19vw;
+        letter-spacing: -4px;
     }
 
-    .hero h2 {
-      margin-top: 35px;
-      font-family: Georgia, serif;
-      font-size: clamp(28px, 5vw, 65px);
-      font-weight: normal;
-      text-transform: uppercase;
-      letter-spacing: 4px;
+    .hero h1 .outline {
+        -webkit-text-stroke: 1px #fff;
     }
 
-    .hero-line {
-      width: 100%;
-      height: 1px;
-      background: #777;
-      margin: 40px 0 20px;
+    .hero::after {
+        font-size: 35vw;
     }
-
-    .hero-sub {
-      font-family: monospace;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .corner {
-      position: absolute;
-      right: 6vw;
-      bottom: 60px;
-      font-family: monospace;
-      font-size: 10px;
-      writing-mode: vertical-rl;
-      letter-spacing: 4px;
-      opacity: 0.5;
-    }
-
-    /* =========================
-       GENERAL SECTIONS
-    ========================= */
 
     section {
-      padding: 110px 8vw;
-      border-bottom: 1px solid #333;
-      position: relative;
+        padding: 85px 20px;
     }
 
-    .section-number {
-      font-family: monospace;
-      font-size: 11px;
-      letter-spacing: 3px;
-      opacity: 0.5;
-      margin-bottom: 15px;
+    .title {
+        letter-spacing: -3px;
     }
-
-    section h3 {
-      font-size: clamp(45px, 8vw, 100px);
-      line-height: 0.9;
-      letter-spacing: -4px;
-      text-transform: uppercase;
-      margin-bottom: 35px;
-    }
-
-    .section-intro {
-      max-width: 650px;
-      font-family: Georgia, serif;
-      font-size: 21px;
-      line-height: 1.6;
-      color: #cfcfc7;
-    }
-
-    /* =========================
-       MUSIC
-    ========================= */
 
     .music-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin-top: 55px;
+        grid-template-columns: 1fr;
     }
 
     .music-card {
-      border: 1px solid #555;
-      padding: 35px;
-      min-height: 190px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: 0.2s ease;
+        min-height: 280px;
     }
 
-    .music-card:hover {
-      transform: translate(-4px, -4px);
-      border-color: #fff;
+    .book {
+        padding: 30px;
     }
 
-    .music-card span {
-      font-family: monospace;
-      font-size: 10px;
-      letter-spacing: 3px;
-      opacity: 0.6;
+    .media-grid {
+        grid-template-columns: 1fr 1fr;
     }
 
-    .music-card h4 {
-      font-size: 32px;
-      text-transform: uppercase;
-      letter-spacing: -1px;
+    .leaf-title {
+        font-size: 21vw;
+        letter-spacing: -4px;
     }
 
-    .music-card a {
-      color: #fff;
-      text-decoration: none;
-      font-family: monospace;
-      font-size: 11px;
-      letter-spacing: 2px;
+    .leaf-section::before {
+        font-size: 100vw;
     }
-
-    /* =========================
-       SYNDICATE
-    ========================= */
-
-    .syndicate {
-      background:
-        repeating-linear-gradient(
-          45deg,
-          #0b0b0b,
-          #0b0b0b 12px,
-          #111 12px,
-          #111 13px
-        );
-    }
-
-    .syndicate-mark {
-      font-size: clamp(30px, 6vw, 80px);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -3px;
-      margin-top: 50px;
-      border-top: 1px solid #555;
-      border-bottom: 1px solid #555;
-      padding: 25px 0;
-    }
-
-    /* =========================
-       BOOKS
-    ========================= */
-
-    .book-box {
-      margin-top: 50px;
-      border: 1px solid #555;
-      padding: 45px;
-      max-width: 850px;
-    }
-
-    .book-box small {
-      font-family: monospace;
-      letter-spacing: 3px;
-      opacity: 0.6;
-    }
-
-    .book-box h4 {
-      font-family: Georgia, serif;
-      font-size: clamp(35px, 6vw, 70px);
-      font-weight: normal;
-      margin: 20px 0;
-    }
-
-    .book-box p {
-      color: #bbb;
-      line-height: 1.7;
-      max-width: 650px;
-    }
-
-    /* =========================
-       5LEAF
-    ========================= */
-
-    .fiveleaf {
-      background: #101010;
-    }
-
-    .fiveleaf-title {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .fiveleaf-symbol {
-      font-size: 45px;
-    }
-
-    .merch-note {
-      margin-top: 35px;
-      font-family: monospace;
-      letter-spacing: 2px;
-      font-size: 12px;
-      color: #aaa;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
 
     footer {
-      padding: 70px 8vw;
-      display: flex;
-      justify-content: space-between;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    footer h5 {
-      font-size: 30px;
-      text-transform: uppercase;
-      letter-spacing: -1px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
     }
 
     footer p {
-      font-family: monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      opacity: 0.5;
-      margin-top: 10px;
+        text-align: left;
     }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 700px) {
-
-      nav {
-        padding: 15px 18px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding-left: 22px;
-        padding-right: 22px;
-      }
-
-      .hero h1 {
-        letter-spacing: -4px;
-      }
-
-      section {
-        padding: 80px 22px;
-      }
-
-      section h3 {
-        letter-spacing: -2px;
-      }
-
-      .music-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .music-card {
-        min-height: 160px;
-      }
-
-      .book-box {
-        padding: 30px 25px;
-      }
-
-      .corner {
-        display: none;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAVIGATION -->
+<nav>
+    <div class="logo">JAYY<span>.</span>VALLEY</div>
 
-  <nav>
-    <div class="nav-name">Jayy Valley</div>
-
-    <ul class="nav-links">
-      <li><a href="#syndicate">Syndicate</a></li>
-      <li><a href="#music">Music</a></li>
-      <li><a href="#books">Books</a></li>
-      <li><a href="#5leaf">5LEAF</a></li>
+    <ul>
+        <li><a href="#syndicate">Syndicate</a></li>
+        <li><a href="#music">Music</a></li>
+        <li><a href="#books">Books</a></li>
+        <li><a href="#media">Media</a></li>
+        <li><a href="#5leaf">5Leaf</a></li>
     </ul>
-  </nav>
+</nav>
 
 
-  <!-- HERO -->
+<header class="hero">
 
-  <header class="hero">
+    <div class="speed-lines"></div>
 
-    <div class="issue">
-      JV / 001 — EST. NOW
+    <div class="hero-content">
+
+        <div class="kicker">
+            /// JAYY VALLEY ARCHIVE — 951 ///
+        </div>
+
+        <h1>
+            JAYY<br>
+            <span class="outline">VALLEY</span>
+        </h1>
+
+        <p class="hero-sub">
+            WELCOME TO <strong>THE SYNDICATE.</strong><br>
+            MUSIC. STORIES. VISUALS. CULTURE.
+        </p>
+
+        <a class="enter" href="#syndicate">
+            ENTER THE WORLD →
+        </a>
+
     </div>
 
-    <h1>Jayy<br>Valley</h1>
-
-    <h2>Welcome to the Syndicate.</h2>
-
-    <div class="hero-line"></div>
-
-    <div class="hero-sub">
-      Music · Stories · Culture · Creation
-    </div>
-
-    <div class="corner">
-      ENTER THE WORLD
-    </div>
-
-  </header>
+</header>
 
 
-  <!-- SYNDICATE -->
+<div class="panel-strip">
 
-  <section id="syndicate" class="syndicate">
+    <div class="panel">001 — SYNDICATE</div>
+    <div class="panel">002 — MUSIC</div>
+    <div class="panel">003 — STORIES</div>
+    <div class="panel">004 — MEDIA</div>
+    <div class="panel">005 — 5LEAF</div>
 
-    <div class="section-number">
-      001 / THE WORLD
-    </div>
+</div>
 
-    <h3>Welcome to<br>the Syndicate.</h3>
 
-    <p class="section-intro">
-      This isn't just a website. It's a doorway into the world of Jayy Valley —
-      music, stories, ideas, visuals, fashion and everything still waiting to
-      be created.
+<section id="syndicate" class="syndicate">
+
+    <div class="label">001 — THE WORLD</div>
+
+    <h2 class="title">
+        Welcome to<br>
+        the Syndicate.
+    </h2>
+
+    <p class="syndicate-text">
+        This isn't just a website.
+        <br><br>
+        It's the world being built around
+        <span>Jayy Valley.</span>
+        <br><br>
+        Music. Writing. Visuals. Ideas.
+        Everything connects here.
     </p>
 
-    <div class="syndicate-mark">
-      ENTER THE WORLD.
-    </div>
-
-  </section>
+</section>
 
 
-  <!-- MUSIC -->
+<section id="music">
 
-  <section id="music">
+    <div class="label">002 — SOUND</div>
 
-    <div class="section-number">
-      002 / SOUND
-    </div>
-
-    <h3>Music</h3>
-
-    <p class="section-intro">
-      Records, projects, releases and sounds from Jayy Valley.
-    </p>
+    <h2 class="title">Music.</h2>
 
     <div class="music-grid">
 
-      <div class="music-card">
-        <span>COMING SOON</span>
-        <h4>Latest Music</h4>
-        <a href="#">ENTER →</a>
-      </div>
+        <div class="music-card">
 
-      <div class="music-card">
-        <span>ARCHIVE</span>
-        <h4>Music Vault</h4>
-        <a href="#">ENTER →</a>
-      </div>
+            <div class="number">TRACK / 001</div>
+
+            <div>
+                <h3>New Music</h3>
+
+                <p>
+                    New releases, singles, projects
+                    and sounds from Jayy Valley.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="music-card">
+
+            <div class="number">ARCHIVE / 002</div>
+
+            <div>
+                <h3>The Vault</h3>
+
+                <p>
+                    Older music, unreleased tracks,
+                    ideas and sounds from the archive.
+                </p>
+            </div>
+
+        </div>
 
     </div>
 
-  </section>
+</section>
 
 
-  <!-- BOOKS -->
+<section id="books">
 
-  <section id="books">
+    <div class="label">003 — WORDS</div>
 
-    <div class="section-number">
-      003 / WORDS
+    <h2 class="title">Books.</h2>
+
+    <div class="book">
+
+        <div class="book-number">01</div>
+
+        <h3>
+            Memories I Tried<br>
+            to Forget
+        </h3>
+
+        <p>
+            A story about memory, identity,
+            life experiences and the moments
+            that refuse to disappear.
+        </p>
+
     </div>
 
-    <h3>Books</h3>
+</section>
 
-    <p class="section-intro">
-      Stories pulled from memory, imagination and everything in between.
+
+<section id="media">
+
+    <div class="label">004 — VISUALS</div>
+
+    <h2 class="title">Media.</h2>
+
+    <div class="media-grid">
+
+        <div class="media-box">
+            <span>VISUAL / 001</span>
+        </div>
+
+        <div class="media-box">
+            <span>VISUAL / 002</span>
+        </div>
+
+        <div class="media-box">
+            <span>VIDEO / 003</span>
+        </div>
+
+        <div class="media-box">
+            <span>ART / 004</span>
+        </div>
+
+        <div class="media-box">
+            <span>ARCHIVE / 005</span>
+        </div>
+
+        <div class="media-box">
+            <span>COMING SOON / 006</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="5leaf" class="leaf-section">
+
+    <div class="leaf-content">
+
+        <div class="label">005 — CLOTHING / MERCH</div>
+
+        <h2 class="leaf-title">
+            5<span>LEAF</span>
+        </h2>
+
+        <p class="leaf-description">
+            The clothing and merchandise side
+            of the Jayy Valley universe.
+            <br><br>
+            Built separately. Connected to the world.
+            <br><br>
+            COMING SOON.
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        JAYY<br>
+        <span>VALLEY</span>
+    </div>
+
+    <p>
+        WELCOME TO THE SYNDICATE.<br>
+        MUSIC / BOOKS / MEDIA / 5LEAF<br>
+        © 2026 JAYY VALLEY
     </p>
 
-    <div class="book-box">
-
-      <small>JAYY VALLEY / WRITING</small>
-
-      <h4>Memories I Tried to Forget</h4>
-
-      <p>
-        A story from the mind of Jayy Valley. More information,
-        excerpts and future releases will live here.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- 5LEAF -->
-
-  <section id="5leaf" class="fiveleaf">
-
-    <div class="section-number">
-      004 / WEARABLE
-    </div>
-
-    <div class="fiveleaf-title">
-      <h3>5LEAF</h3>
-      <div class="fiveleaf-symbol">☘</div>
-    </div>
-
-    <p class="section-intro">
-      Clothing and merchandise from within the Syndicate.
-    </p>
-
-    <div class="merch-note">
-      THE 5LEAF COLLECTION — COMING SOON
-    </div>
-
-  </section>
-
-
-  <!-- FOOTER -->
-
-  <footer>
-
-    <div>
-      <h5>Jayy Valley</h5>
-      <p>WELCOME TO THE SYNDICATE.</p>
-    </div>
-
-    <div>
-      <p>© 2026 JAYY VALLEY</p>
-      <p>ALL RIGHTS RESERVED.</p>
-    </div>
-
-  </footer>
+</footer>
 
 </body>
 </html>
